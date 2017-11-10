@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Biblioteka</title>
+    <!-- Styles: -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Scripts: -->
+    <script src="libs/angularjs.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="appController">
+    <div class="container">
+        <div ng-switch="state">
+            <div ng-switch-when="lista">
+                <div class="images">
+                    <img ng-click="getMagazineDetails(index)" ng-repeat="(index, mag) in magazines" ng-src="http://www.atarionline.pl/biblioteka/czasopisma/img/{{mag.src}}" /><br>
+                </div> 
+            </div>
+            <div ng-switch-when="lata">
+                <div class="buttonyLata">
+                    <button ng-click="pokazRok($event)" ng-repeat="(index, year) in years" class="buttonLata">{{year}}</button>
+                    <button ng-click="pokazRokWszystkie()" class="buttonLata">Wszystkie</button>
+                </div>
+                <img src="images/arrowBack.png" alt="back to list" ng-click="wrocDoListy()" class="back-button">
+            </div>
+        </div>
+
+        <table class="details" border="1" ng-if="areDetailsOn">
+            <tr>
+                <th>Strona tytułowa</th>
+                <th>plik</th>
+                <th>pismo</th>
+                <th>darczyńcy</th>
+            </tr>
+            <tr ng-repeat="(index, detail) in details">
+                <!-- strona tytulowa, plik, pismo, darczyńcy -->
+                <!-- <td><img ng-src="http://www.atarionline.pl/biblioteka/czasopisma/{{detail.nazwaZUnderscore}}/{{detail.miniaturka}}" alt="brak"></td> -->
+                <td><img ng-src="http://www.atarionline.pl/biblioteka/czasopisma/{{selectedMagKlik}}/{{detail.miniaturka}}" alt="brak"></td>
+                
+                <td ng-if="!detail.$.brak">
+                    Format: <b>{{detail.format}}</b><br>
+                    Plik: <a ng-href="http://www.atarionline.pl/biblioteka/czasopisma/{{detail.nazwaZUnderscore}}/{{detail.plik}}">tutaj</a><br>
+                    Stron: <b>{{detail.stron}}</b>
+                </td>
+                <td ng-if="!detail.$.brak">
+                    Nazwa: <b>{{detail.nazwa}}</b><br>
+                    Numer: <b>{{detail.numer}}</b><br>
+                    Wydawca: <b>{{detail.wydawca}}</b>
+                </td>
+                <td ng-if="!detail.$.brak">
+                    Skan: <b>{{detail.skan}}</b><br>
+                    Przetworzenie: <b>{{detail.przetworzenie}}</b><br>
+                    Podesłał: <b>{{detail.podeslal}}</b>
+                </td>
+                <td ng-if="detail.$.brak" colspan="3">{{detail.$.brak}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.images{
+    margin: 0 auto;
+    width:500px;
+}
+.images *{
+    border: 2px solid black;
+    margin: 10px;
+    height:60px;
+    width:200px;
+    cursor: pointer;
+}
+.buttonLata{
+    background: #8CC8FF;
+}
+.back-button{
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+}
+.container{
+    width: 960px;
+    margin: 0 auto;
+}
+td{
+    text-align: center;
+}
